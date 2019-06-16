@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import App from './components/app';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import ErrorBoundry from './components/errorBoundry'
+import { SimpleBlogProvider } from './components/simpleBlogServiceContext';
+import SimpleBlogService from './services/simpleBlogService'
+import store from './store'
+
+const simpleBlogService = new SimpleBlogService();
+
+ReactDOM.render(
+    <Provider store={store}>
+        <ErrorBoundry>
+            <SimpleBlogProvider value={simpleBlogService} >
+                <Router>
+                    <App />
+                </Router>
+            </SimpleBlogProvider>
+        </ErrorBoundry>
+    </Provider>,
+    document.getElementById('root')
+);
+
