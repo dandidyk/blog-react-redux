@@ -1,5 +1,5 @@
-import withSimpleBlogService from './withSimpleBlogService';
+import withGitHubService from './withGitHubService';
 
 export {
-  withSimpleBlogService
+  withGitHubService
 };

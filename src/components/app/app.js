@@ -1,31 +1,29 @@
 import React, { Fragment } from 'react';
 
-import PostsList from '../postsList';
-import BlogNavigation from '../blogNavigation'
-import PostDetails from '../postDetails'
+import OrgsList from '../orgsList';
+import OrgDetails from '../orgDetails'
 import Form from '../form'
 
 import { Switch, Route } from 'react-router-dom'
 
 const App = () => {
 
-  
+
 
   return (
     <div >
-      <h1> Blog </h1>
-      <BlogNavigation />
+      <h1> Search GitHub Organizations </h1>
       <Switch>
-        <Route path={'/posts/'} exact render={() =>
+        <Route exact path={'/'} render={() =>
           <Fragment >
-            <PostsList />
             <Form />
+            <OrgsList />
           </Fragment>
         } />
-        <Route path="/posts/:id"
+        <Route path="/:id"
           render={({ match }) => {
             const { id } = match.params;
-            return <PostDetails itemId={id} />
+            return <OrgDetails itemId={id} />
           }} />
 
       </Switch>

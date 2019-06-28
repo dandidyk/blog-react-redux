@@ -6,20 +6,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 
 import ErrorBoundry from './components/errorBoundry'
-import { SimpleBlogProvider } from './components/simpleBlogServiceContext';
-import SimpleBlogService from './services/simpleBlogService'
+import { GitHubServiceProvider } from './components/gitHubServiceContext';
+import GitHubService from './services/gitHubService'
 import store from './store'
 
-const simpleBlogService = new SimpleBlogService();
+const gitHubService = new GitHubService();
 
 ReactDOM.render(
     <Provider store={store}>
         <ErrorBoundry>
-            <SimpleBlogProvider value={simpleBlogService} >
+            <GitHubServiceProvider value={gitHubService} >
                 <Router>
                     <App />
                 </Router>
-            </SimpleBlogProvider>
+            </GitHubServiceProvider>
         </ErrorBoundry>
     </Provider>,
     document.getElementById('root')

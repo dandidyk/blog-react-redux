@@ -1,33 +1,34 @@
 const initialState = {
-    posts: [],
-    selectedPost: 0,
-    newPost: {
-        author: '',
-        title: '',
-        body: ''
-    }
+    orgs: [],
+    selectedOrg: null,
+    searchInput: ''
 };
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case 'POSTS_LOADED':
+        case 'ORGS_LOADED':
             return {
                 ...state,
-                posts: action.payload,
+                orgs: action.payload,
             };
-        case 'SELECT_POST':
+        case 'SELECT_ORG':
             return {
                 ...state,
-                selectedPost: action.payload,
+                selectedOrg: action.payload,
             };
-        case 'INPUT_NEW_POST':
+        // case 'SEARCH_ORG':
+        //     return {
+        //         ...state,
+        //         newPost: {
+        //             ...state.newPost,
+        //             [action.payload.field]: action.payload.text
+        //         }
+        //     };
+        case 'INPUT_ORG':
             return {
                 ...state,
-                newPost: {
-                    ...state.newPost,
-                    [action.payload.field] : action.payload.text
-                }
+                searchInput: action.payload,
             };
         default:
             return state;

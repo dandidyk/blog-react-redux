@@ -2,52 +2,46 @@ import React from 'react'
 
 import { compose } from '../../utils'
 import { connect } from 'react-redux'
-import { withSimpleBlogService } from '../hoc'
-import { createNewPost, postsLoaded } from '../../actions'
+import { withGitHubService } from '../hoc'
+import {  orgsLoaded, inputOrg } from '../../actions'
 
-const Form = ({ newPost, createNewPost, simpleBlogService, postsLoaded }) => {
+const Form = ({ gitHubService, orgsLoaded, inputOrg, searchInput }) => {
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        const { createPost, getAllPosts } = simpleBlogService
+        const { getOrganizations } = gitHubService
 
-        createPost(newPost)
-        getAllPosts()
+        getOrganizations(searchInput)
             .then((data) => {
-                postsLoaded(data)
+                orgsLoaded(data)
             })
     }
 
     const onChange = e => {
-        createNewPost({
-            text: e.target.value,
-            field: e.target.name
-        })
+        inputOrg(e.target.value)
     }
 
     return (
-        <form onSubmit={onSubmit}>
-            <input onChange={(e) => onChange(e)} name='author' type='text' placeholder='Author' />
-            <input onChange={(e) => onChange(e)} name='title' type='text' placeholder='Title' />
-            <input onChange={(e) => onChange(e)} name='body' type='text' placeholder='Body' />
+        <form onSubmit={onSubmit} >
+            <input onChange={(e) => onChange(e)} name='org' type='text' placeholder='Organization name' />
             <button type='submit' >
-                Add Post
+                Search
             </button>
         </form>
     )
 }
 
-const mapStateToProps = ({ newPost }) => {
-    return { newPost };
+const mapStateToProps = ({ searchInput }) => {
+    return { searchInput };
 };
 
 const mapDispatchToProps = {
-    createNewPost,
-    postsLoaded
+    orgsLoaded,
+    inputOrg
 }
 
 export default compose(
-    withSimpleBlogService(),
+    withGitHubService(),
     connect(mapStateToProps, mapDispatchToProps)
 )(Form)

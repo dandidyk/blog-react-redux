@@ -1,27 +1,29 @@
 
-const postsLoaded = (posts) => {
+const orgsLoaded = (orgs) => {
     return {
-        type: 'POSTS_LOADED',
-        payload: posts
+        type: 'ORGS_LOADED',
+        payload: orgs
     };
 };
 
-const selectPost = ( post ) => {
+const selectOrg = (org) => {
+    console.log(org);
+    
     return {
-        type: 'SELECT_POST',
-        payload: post
+        type: 'SELECT_ORG',
+        payload: org
     };
 };
 
-const createNewPost = ( post ) => {
+const inputOrg = (org) => {
     return {
-        type: 'INPUT_NEW_POST',
-        payload: post
+        type: 'INPUT_ORG',
+        payload: org
     };
 };
 
 export {
-    postsLoaded,
-    selectPost,
-    createNewPost
+    orgsLoaded,
+    selectOrg,
+    inputOrg
 };
